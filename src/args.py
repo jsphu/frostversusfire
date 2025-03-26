@@ -3,28 +3,27 @@ import pygame
 
 class Args:
     def __init__(self):
-        self.HEAD = 0
+        args=""
 
-        arguments = []
-        if   "--noframe" in ARGS:
-            arguments.append("pygame.NOFRAME")
+        for arg in ARGS[1:]:
+            if "-" in arg:
+                arg = arg.strip("-")
 
-        elif "--resizable" in ARGS:
-            arguments.append("pygame.RESIZABLE")
+            if "help" in arg.lower():
+                print("HELP     \trunning options listed below.\n"
+        "FULLSCREEN \tcreate a fullscreen display\n"
+        "DOUBLEBUF  \tonly applicable with OPENGL\n"
+        "HWSURFACE  \thardware accelerated, only in FULLSCREEN\n"
+        "OPENGL     \tcreate an OpenGL-renderable display\n"
+        "RESIZABLE  \tdisplay window should be sizeable\n"
+        "NOFRAME    \tdisplay window will have no border or controls\n"
+        "SCALED     \tresolution depends on desktop size and scale graphics\n"
+        "SHOWN      \twindow is opened in visible mode (default)\n"
+        "HIDDEN     \twindow is opened in hidden mode")
+                exit()
 
-        elif "--scaled" in ARGS:
-            arguments.append("pygame.SCALED")
+            args += f" pygame.{arg.upper()} |"
 
-        elif "--fullscreen" in ARGS:
-            arguments.append("pygame.FULLSCREEN")
+        args = args[:-1] if args != "" else 0
 
-        if len(arguments) > 0:
-
-            args = ""
-            for arg in arguments:
-                args += str(arg) + " | "
-
-            args = args[:-3]
-
-            exec(f"self.HEAD = {args}")
-
+        exec(f"self.HEAD ={args}")

@@ -25,7 +25,7 @@ class Main:
                 self.events.handle_events(event)
 
             self.screen.fill(Colors.WHITE)
-            
+
             pygame.display.flip()
 
             dt = clock.tick(self.state.fps)
